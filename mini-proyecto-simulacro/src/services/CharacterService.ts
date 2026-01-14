@@ -27,5 +27,17 @@ export const characterService = {
       })
       .then(data => callback(data))
       .catch(error => console.log(error))
+  },
+
+  getCharactersByName(name:string,callback: (characters: Character[]) => void){
+    fetch("https://rickandmortyapi.com/api/character/?name=" + name)
+      .then(response => {
+        if(response.ok){
+          return response.json();
+        }
+        throw new Error("No hay ningún personaje con el nombre " + name);
+      })
+      .then(data => callback(data))
+      .catch(error => console.log(error))
   }
 };
